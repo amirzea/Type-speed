@@ -58,7 +58,7 @@ function updateCronometer() {
     --seconds;
     CRONOMETER.innerHTML = seconds;
     if (seconds == 0) {
-        clearInterval(updateCronometer);
+        clearInterval(cronometer);
     }
 }
 
