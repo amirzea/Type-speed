@@ -3,6 +3,10 @@ const TEXT_BAR = document.getElementById("textBar");
 const CRONOMETER = document.getElementById("cronometer");
 const WORDS = document.getElementById("words");
 const INSTRUCTIONS = document.getElementById("instructions");
+const ONE_MINUTE = 1000;
+const ONE = 1;
+const CHAR_A = 97;
+const CHAR_Z = 122;
 let words = ["garden", "shadow", "captain", "elephant", "bicycle", "adventure", "journey", "volcano", "tornado", "horizon", "paradise", "wonder", "zebra", "piano", "fragrance", "harmony", "symphony", "thunder", "chocolate", "melody", "serenade", "fantasy", "passion", "captivate", "enchant", "blossom", "silhouette", "lullaby", "symphony", "twinkle", "glimmer", "harmony", "cascade", "whirlwind", "luminary", "marvel", "gossamer", "solitude", "galaxy", "mystify", "enchanting", "captivating", "enrapture", "ethereal", "velvet", "enigma", "tranquil", "serenity", "solitude", "enchanting", "giggle", "dive", "skip", "twinkle", "bounce", "wander", "race", "breeze", "roar", "whisk", "explore", "dazzle", "delight", "skip", "gallop", "swim"];
 let typedWords = [];
 let numberWords = 0;
@@ -17,15 +21,15 @@ document.addEventListener("keyup", keyIsPressed);
 
 function keyIsPressed(e) {
     if (charIndex < 0) {
-        cronometer = setInterval(updateCronometer, 1000);
+        cronometer = setInterval(updateCronometer, ONE_MINUTE);
         INSTRUCTIONS.innerHTML = "Press space to submit word ";
         charIndex = 0;
     }
-    if(e.key.charCodeAt(0) >= 97 && e.key.charCodeAt(0) <= 122) {
+    if(e.key.charCodeAt(0) >= CHAR_A && e.key.charCodeAt(0) <= CHAR_Z) {
         let key = e.key.charCodeAt(0);
         checkCharacter(key);
     } else if (e.code == "Space") {
-        WRITING_BAR.innerHTML = " ";
+        WRITING_BAR.innerHTML = "";
         if (wrongChar == 0) {
             ++wordsOnTextBar;
         }
@@ -38,7 +42,7 @@ function keyIsPressed(e) {
 function checkCharacter(key) {
     if (String.fromCharCode(key) == words[wordsIndex][charIndex]) {
         WRITING_BAR.innerHTML += `<p style='color: green '>${String.fromCharCode(key)}</p>`;
-        if (words[wordsIndex].length == charIndex + 1) {
+        if (words[wordsIndex].length == charIndex + ONE) {
             ++wordsIndex;
             charIndex = 0;
             if (wrongChar == 0) {
@@ -50,7 +54,7 @@ function checkCharacter(key) {
     } else {
         WRITING_BAR.innerHTML += `<p style='color: red'>${String.fromCharCode(key)}</p>`
         ++charIndex;
-        wrongChar = 1;
+        wrongChar = ONE;
     }
 }
 
